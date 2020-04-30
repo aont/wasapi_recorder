@@ -15,13 +15,6 @@ HRESULT LoopbackCapture(
 HRESULT WriteWaveHeader(HMMIO hFile, LPCWAVEFORMATEX pwfx, MMCKINFO *pckRIFF, MMCKINFO *pckData);
 HRESULT FinishWaveFile(HMMIO hFile, MMCKINFO *pckRIFF, MMCKINFO *pckData);
 
-class FcloseOnExit {
-    HMMIO const fp;
-    public:
-    FcloseOnExit(HMMIO const fp) : fp(fp) { };
-    ~FcloseOnExit() { mmioClose(fp, 0); };
-};
-
 DWORD WINAPI LoopbackCaptureThreadFunction(LPVOID pContext) {
     LoopbackCaptureThreadFunctionArguments *pArgs =
         (LoopbackCaptureThreadFunctionArguments*)pContext;
